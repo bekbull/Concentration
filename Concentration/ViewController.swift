@@ -41,7 +41,7 @@ class ViewController: UIViewController {
     
     private var emojiChoices = [String]()
     
-    private var emoji = Dictionary<Int, String>()
+    private var emoji = Dictionary<Card, String>()
     
     private func themeChoose(){
         emojiChoices = themes[themes.count.arc4random]
@@ -50,7 +50,7 @@ class ViewController: UIViewController {
     
     @IBAction func restartGame(_ sender: UIButton) {
         themeChoose()
-        emoji = Dictionary<Int, String>()
+        emoji = Dictionary<Card, String>()
         game.restart()
         updateViewFromModel()
 
@@ -80,10 +80,10 @@ class ViewController: UIViewController {
         }
     }
     private func emoji(for card: Card) -> String {
-        if emoji[card.identifier] == nil, emojiChoices.count > 0 {
-            emoji[card.identifier] = emojiChoices.remove(at: emojiChoices.count.arc4random)
+        if emoji[card] == nil, emojiChoices.count > 0 {
+            emoji[card] = emojiChoices.remove(at: emojiChoices.count.arc4random)
         }
-        return emoji[card.identifier] ?? "?"
+        return emoji[card] ?? "?"
     }
     override func viewDidLoad() {
         super.viewDidLoad()
